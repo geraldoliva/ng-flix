@@ -1,16 +1,17 @@
-import { JsonPipe, NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
+import { Movie } from '../../../types/movie';
 
 @Component({
   selector: 'app-slider',
   standalone: true,
-  imports: [NgIf, JsonPipe],
+  imports: [CommonModule],
   templateUrl: './slider.component.html',
   styleUrl: './slider.component.scss',
 })
 export class SliderComponent implements OnInit{
-  movies: any = [];
+  movies: Movie[] = [];
 
   constructor(private moviesService: MoviesService) {}
 
@@ -20,7 +21,7 @@ export class SliderComponent implements OnInit{
 
   getPopularMovies() {
     this.moviesService.getPopularMovies().subscribe((data) => {
-      this.movies = Array.from(data.results);
+      this.movies = data.results;
     });
   }
 }

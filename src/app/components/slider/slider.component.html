@@ -27,5 +27,8 @@
     </div>
   </div>
 </div>
-<div *ngIf="movies.length > 5">{{movies.length}}</div>
+<div *ngIf="movies">
+  <div *ngFor="let movie of movies">{{ movie.original_title }}</div>
+</div>
+
 <pre>{{ movies | json }}</pre>
