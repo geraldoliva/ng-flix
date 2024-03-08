@@ -1,34 +1,34 @@
-<div class="slider">
-  <div class="slide">
-    <div class="slide-bg">
-      <img
-        src="https://image.tmdb.org/t/p/original/nnFgBA6nR0pHorxdFaDvdY4nVHL.jpg"
-        alt=""
-      />
-    </div>
-    <div class="slide-pane">
-      <h2 class="title">Slider Title</h2>
-      <div class="meta mb-4">
-        <div class="rating mb-1">
-          <i class="pi pi-star-fill"></i>
-          <span>8.7</span>
-          <span>/10</span>
-        </div>
-        <div class="votes mb-1">
-          <i class="pi pi-users"></i>
-          <span>4433</span>
-        </div>
-        <div class="release-date">
-          <i class="pi pi-calendar"></i>
-          <span>20.06.2024</span>
-        </div>
+<div class="slider" *ngIf="movies.length > 0">
+  <ng-container *ngFor="let movie of movies; let movieIndex = index">
+    <div class="slide"  *ngIf="movieIndex === slideIndex" @slideFade>
+      <div class="slide-bg">
+        <img
+          [src]="imagesBaseUrl + 'w1280' + movie.backdrop_path"
+          [alt]="movie.title"
+        />
       </div>
-      <div class="description">some text will go here</div>
+      <div class="slide-pane">
+        <h2 class="title">{{ movie.original_title }}</h2>
+        <div class="meta mb-4">
+          <div class="rating mb-1">
+            <i class="pi pi-star-fill"></i>
+            <span>{{ movie.vote_average | number : "1.0-2" }}</span>
+            <span>/10</span>
+          </div>
+          <div class="votes mb-1">
+            <i class="pi pi-users"></i>
+            <span>{{ movie.vote_count }}</span>
+          </div>
+          <div class="release-date">
+            <i class="pi pi-calendar"></i>
+            <span>{{ movie.release_date | date: 'yyyy'}}</span>
+          </div>
+        </div>
+        <div class="description">{{ movie.overview }}</div>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>
-<div *ngIf="movies">
+<!-- <div *ngIf="movies">
   <div *ngFor="let movie of movies">{{ movie.original_title }}</div>
-</div>
-
-<pre>{{ movies | json }}</pre>
+</div> -->
