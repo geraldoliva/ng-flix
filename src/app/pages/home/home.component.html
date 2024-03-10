@@ -1,3 +1,22 @@
 <app-slider></app-slider>
-<app-banner></app-banner>
-<div>Popular TV Shows</div>
+
+<ng-container *ngIf="upcomingMovies">
+  <app-banner
+    [title]="'Upcoming Movies'"
+    [movies]="upcomingMovies"
+  ></app-banner>
+</ng-container>
+
+<ng-container *ngIf="topRatedMovies">
+  <app-banner
+    [title]="'Top Rated Movies'"
+    [movies]="topRatedMovies"
+  ></app-banner>
+</ng-container>
+
+<ng-container *ngIf="popularTvShows">
+  <app-banner
+    [title]="'Popular TV Shows'"
+    [movies]="popularTvShows"
+  ></app-banner>
+</ng-container>

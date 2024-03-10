@@ -38,7 +38,7 @@ export class SliderComponent implements OnInit {
   }
 
   changeSlide() {
-    this.getPopularMovies();
+    this.getMoviesByType();
     setInterval(() => {
       this.slideIndex += 1;
       if (this.slideIndex > 10) {
@@ -47,9 +47,9 @@ export class SliderComponent implements OnInit {
     }, 5000);
   }
 
-  getPopularMovies() {
-    this.moviesService.getPopularMovies().subscribe((data) => {
-      this.movies = data.results;
+  getMoviesByType() {
+    this.moviesService.getMoviesByType("popular").subscribe((data) => {
+      this.movies = data;
     });
   }
 }
