@@ -6,17 +6,21 @@ import { CommonModule } from '@angular/common';
 import { SliderComponent } from '../../components/slider/slider.component';
 import { TabViewModule } from 'primeng/tabview';
 import { IMAGE_SIZES } from '../../constants/image-sizes';
+import { Video } from '../../../types/video';
+import { VideoEmbedComponent } from '../../components/video-embed/video-embed.component';
 
 @Component({
   selector: 'app-show-detail',
   standalone: true,
-  imports: [CommonModule, SliderComponent, TabViewModule],
+  imports: [CommonModule, SliderComponent, TabViewModule, VideoEmbedComponent],
   templateUrl: './show-detail.component.html',
   styleUrl: './show-detail.component.scss',
 })
 export class ShowDetailComponent implements OnInit {
   showId = '';
   show: Movie | null = null;
+  showVideos: Video[] = [];
+
   imageSizes = IMAGE_SIZES;
 
   constructor(
@@ -32,6 +36,11 @@ export class ShowDetailComponent implements OnInit {
 
     this.moviesService.getMovieById(this.showId).subscribe((data) => {
       this.show = data;
+    });
+
+    this.moviesService.getMovieVideos(this.showId).subscribe(data => {
+      console.log(data)
+      this.showVideos = data
     });
   }
 }
