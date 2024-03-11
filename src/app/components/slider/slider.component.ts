@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../../../types/movie';
 import { imageBaseUrl } from '../../constants/image-sizes';
@@ -25,20 +25,23 @@ import {
   ],
 })
 export class SliderComponent implements OnInit {
-  movies: Movie[] = [];
+  @Input() slides: Movie[] = [];
+  @Input() isHeader = false;
 
   slideIndex = 0;
 
-  imagesBaseUrl = imageBaseUrl
+  imagesBaseUrl = imageBaseUrl;
 
   constructor(private moviesService: MoviesService) {}
 
   ngOnInit(): void {
-    this.changeSlide();
+    if (!this.isHeader) {
+      this.changeSlide();
+    }
   }
 
   changeSlide() {
-    this.getMoviesByType();
+    // this.getMoviesByType();
     setInterval(() => {
       this.slideIndex += 1;
       if (this.slideIndex > 10) {
@@ -47,9 +50,9 @@ export class SliderComponent implements OnInit {
     }, 5000);
   }
 
-  getMoviesByType() {
-    this.moviesService.getMoviesByType("popular").subscribe((data) => {
-      this.movies = data;
-    });
-  }
+  // getMoviesByType() {
+  //   this.moviesService.getMoviesByType('popular').subscribe((data) => {
+  //     this.movies = data;
+  //   });
+  // }
 }

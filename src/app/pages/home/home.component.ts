@@ -18,6 +18,8 @@ export class HomeComponent implements OnInit {
   upcomingMovies: Movie[] = [];
   topRatedMovies: Movie[] = [];
   popularTvShows: Movie[] = [];
+  popularMovies: Movie[] = [];
+  
 
   constructor(
     private moviesService: MoviesService,
@@ -30,6 +32,8 @@ export class HomeComponent implements OnInit {
         this.upcomingMovies = data;
       } else if (type === 'top_rated') {
         this.topRatedMovies = data;
+      } else if (type === 'popular') {
+        this.popularMovies = data
       }
     });
   }
@@ -41,8 +45,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getMoviesByType('popular');
     this.getMoviesByType('upcoming');
     this.getMoviesByType('top_rated');
     this.getTvShowsByType('popular');
+    
   }
 }
