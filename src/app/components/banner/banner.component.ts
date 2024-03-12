@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { ShowItemComponent } from '../show-item/show-item.component';
 import { CommonModule } from '@angular/common';
 import { Movie } from '../../../types/movie';
-import { TvShow } from '../../../types/tvshow';
 
 @Component({
   selector: 'app-banner',
@@ -14,6 +13,14 @@ import { TvShow } from '../../../types/tvshow';
 export class BannerComponent {
   @Input() title: string = '';
   @Input() movies: Movie[] = [];
-  @Input() tvShows: TvShow[] = []
-  @Input() showType: string = ''
+  @Input() showsType: 'tv' | 'movie' = 'movie';
+
+  constructor() {}
+
+  // ngOnInit(): void {
+  //   this.showsType = this.router.snapshot.params['type'];
+  //   if (this.showsType === 'tv') {
+  //     this.title = 'Similar TV Shows';
+  //   }
+  // }
 }

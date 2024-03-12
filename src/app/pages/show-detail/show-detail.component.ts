@@ -13,29 +13,39 @@ import { ImageModule } from 'primeng/image';
 import { CarouselModule } from 'primeng/carousel';
 import { Actor } from '../../../types/credits';
 import { BannerComponent } from '../../components/banner/banner.component';
-
-
+import { TvshowsService } from '../../services/tvshows.service';
+import { mapToMovie, mapToMovies } from '../../../types/tvshow';
 
 @Component({
   selector: 'app-show-detail',
   standalone: true,
-  imports: [CommonModule, SliderComponent, TabViewModule, VideoEmbedComponent, ImageModule, CarouselModule, BannerComponent],
+  imports: [
+    CommonModule,
+    SliderComponent,
+    TabViewModule,
+    VideoEmbedComponent,
+    ImageModule,
+    CarouselModule,
+    BannerComponent,
+  ],
   templateUrl: './show-detail.component.html',
   styleUrl: './show-detail.component.scss',
 })
 export class ShowDetailComponent implements OnInit {
   showId = '';
+  showType: 'tv' | 'movie' = 'movie';
+
   show: Movie | null = null;
   showVideos: Video[] = [];
-  showImages: Image[] = []
-  showCast: Actor[] = []
-  similarMovies: Movie[] = []
+  showImages: Image[] = [];
+  showCast: Actor[] = [];
+  similarMovies: Movie[] = [];
 
   imageSizes = IMAGE_SIZES;
 
   constructor(
     private router: ActivatedRoute,
-    private moviesService: MoviesService
+    private moviesService: MoviesService, private tvService: TvshowsService
   ) {}
 
   ngOnInit(): void {
@@ -44,26 +54,56 @@ export class ShowDetailComponent implements OnInit {
       this.showId = params['id'];
     });
 
-    this.moviesService.getMovieById(this.showId).subscribe((data) => {
-      this.show = data;
-    });
+    this.showType = this.router.snapshot.params['type']
 
-    this.moviesService.getMovieVideos(this.showId).subscribe(data => {
-      console.log(data)
-      this.showVideos = data
-    });
+    if (this.showType === 'movie') {
+      this.moviesService.getMovieById(this.showId).subscribe((data) => {
+        this.show = data;
+      });
 
-    this.moviesService.getMovieImages(this.showId).subscribe(data => {
-      console.log(data)
-      this.showImages = data.slice(0,12)
-    })
+      this.moviesService.getMovieVideos(this.showId).subscribe((data) => {
+        console.log(data);
+        this.showVideos = data;
+      });
 
-    this.moviesService.getMovieCast(this.showId).subscribe(data => {
-      this.showCast = data
-    })
+      this.moviesService.getMovieImages(this.showId).subscribe((data) => {
+        console.log(data);
+        this.showImages = data.slice(0, 12);
+      });
 
-    this.moviesService.getSimilarMovies(this.showId).subscribe(data => {
-      this.similarMovies = data
-    })
+      this.moviesService.getMovieCast(this.showId).subscribe((data) => {
+        this.showCast = data;
+      });
+
+      this.moviesService.getSimilarMovies(this.showId).subscribe((data) => {
+        this.similarMovies = data;
+      });
+    }
+
+    if (this.showType === 'tv') {
+      this.tvService.getTvShowById(this.showId).subscribe((data) => {
+        this.show = mapToMovie(data)
+      });
+
+      this.tvService.getTvShowVideos(this.showId).subscribe((data) => {
+        console.log(data);
+        this.showVideos = data;
+      });
+
+      this.tvService.getTvShowImages(this.showId).subscribe((data) => {
+        console.log(data);
+        this.showImages = data.slice(0, 12);
+      });
+
+      this.tvService.getTvShowCast(this.showId).subscribe((data) => {
+        this.showCast = data;
+      });
+
+      this.tvService.getSimilarTvShows(this.showId).subscribe((data) => {
+        this.similarMovies = mapToMovies(data);
+      });
+    }
+
+    
   }
 }
