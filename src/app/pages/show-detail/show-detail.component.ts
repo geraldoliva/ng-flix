@@ -12,13 +12,14 @@ import { Image } from '../../../types/image';
 import { ImageModule } from 'primeng/image';
 import { CarouselModule } from 'primeng/carousel';
 import { Actor } from '../../../types/credits';
+import { BannerComponent } from '../../components/banner/banner.component';
 
 
 
 @Component({
   selector: 'app-show-detail',
   standalone: true,
-  imports: [CommonModule, SliderComponent, TabViewModule, VideoEmbedComponent, ImageModule, CarouselModule],
+  imports: [CommonModule, SliderComponent, TabViewModule, VideoEmbedComponent, ImageModule, CarouselModule, BannerComponent],
   templateUrl: './show-detail.component.html',
   styleUrl: './show-detail.component.scss',
 })
@@ -28,6 +29,7 @@ export class ShowDetailComponent implements OnInit {
   showVideos: Video[] = [];
   showImages: Image[] = []
   showCast: Actor[] = []
+  similarMovies: Movie[] = []
 
   imageSizes = IMAGE_SIZES;
 
@@ -58,6 +60,10 @@ export class ShowDetailComponent implements OnInit {
 
     this.moviesService.getMovieCast(this.showId).subscribe(data => {
       this.showCast = data
+    })
+
+    this.moviesService.getSimilarMovies(this.showId).subscribe(data => {
+      this.similarMovies = data
     })
   }
 }

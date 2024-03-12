@@ -1,9 +1,9 @@
+{{ showType + "bbbbbbbbbbbbbbbb" }}
 <div class="banner container" *ngIf="movies.length">
-  <h1>{{title}}</h1>
+  <h1>{{ title }}</h1>
   <div class="grid">
     <div class="col-2" *ngFor="let movie of movies">
-      <app-show-item [showItem]="movie"></app-show-item>
+      <app-show-item [showItem]="movie" [showType]="showType"></app-show-item>
     </div>
   </div>
 </div>
-
