@@ -14,20 +14,19 @@
   </div>
   <ng-container *ngIf="showsList">
     <div class="grid">
-      <div class="col-2" *ngFor="let show of showsList">
+      <div class="col-2" *ngFor="let show of showsList.results">
         <app-show-item [showItem]="show"></app-show-item>
       </div>
     </div>
-  </ng-container>
 
-  <div class="grid">
-    <div class="col-12">
-      <p-paginator
-        (onPageChange)="pageChanged($event)"
-        [rows]="20"
-        [totalRecords]="120"
-        [rowsPerPageOptions]="[10, 20, 30]"
-      ></p-paginator>
+    <div class="grid">
+      <div class="col-12">
+        <p-paginator
+          (onPageChange)="pageChanged($event)"
+          [rows]="20"
+          [totalRecords]="showsList.total_results"
+        ></p-paginator>
+      </div>
     </div>
-  </div>
+  </ng-container>
 </div>

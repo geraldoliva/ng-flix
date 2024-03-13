@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MoviesService } from '../../services/movies.service';
-import { Movie } from '../../../types/movie';
+import { MoviesDto } from '../../../types/movie';
 import { CommonModule } from '@angular/common';
 import { ShowItemComponent } from '../../components/show-item/show-item.component';
 import { InputTextModule } from 'primeng/inputtext';
@@ -21,7 +21,7 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator';
   styleUrl: './shows-list.component.scss',
 })
 export class ShowsListComponent implements OnInit {
-  showsList: Movie[] = [];
+  showsList: MoviesDto | null = null;
   searchValue = '';
   constructor(private movieService: MoviesService) {}
 
