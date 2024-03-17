@@ -6,6 +6,9 @@ import { ShowItemComponent } from '../../components/show-item/show-item.componen
 import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { ActivatedRoute } from '@angular/router';
+import { TvshowsService } from '../../services/tvshows.service';
+import { mapToMoviesDto } from '../../../types/tvshow';
 
 @Component({
   selector: 'app-shows-list',
@@ -23,16 +26,30 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 export class ShowsListComponent implements OnInit {
   showsList: MoviesDto | null = null;
   searchValue = '';
-  constructor(private movieService: MoviesService) {}
+  showType: 'tv' | 'movie' = 'movie';
+  constructor(
+    private movieService: MoviesService,
+    private tvShowService: TvshowsService,
+    private router: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
+    this.showType = this.router.snapshot.params['type'];
     this.getPagedShows(1);
   }
 
   getPagedShows(page: number, searchKeyword?: string) {
-    this.movieService.searchMovies(page, searchKeyword).subscribe((data) => {
-      this.showsList = data;
-    });
+    if (this.showType === 'movie') {
+      this.movieService.searchMovies(page, searchKeyword).subscribe((data) => {
+        this.showsList = data;
+      });
+    } else if (this.showType === 'tv') {
+      this.tvShowService
+        .searchTvShows(page, searchKeyword)
+        .subscribe((data) => {
+          this.showsList = mapToMoviesDto(data);
+        });
+    }
   }
 
   searchChanged() {

@@ -6,7 +6,7 @@ import { GenresComponent } from './pages/genres/genres.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
-  { path: 'list', component: ShowsListComponent },
+  { path: 'list/:type', component: ShowsListComponent },
   { path: 'detail/:id/:type', component: ShowDetailComponent },
   { path: 'genres', component: GenresComponent },
   { path: 'genres/:genreId', component: GenresComponent },

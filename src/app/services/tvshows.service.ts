@@ -41,17 +41,21 @@ export class TvshowsService {
 
   getTvShowCast(id: string) {
     return this.http
-      .get<CreditsDto>(
-        `${this.apiUrl}/tv/${id}/credits?api_key=${this.apiKey}`
-      )
+      .get<CreditsDto>(`${this.apiUrl}/tv/${id}/credits?api_key=${this.apiKey}`)
       .pipe(map((data) => data.cast));
   }
 
   getSimilarTvShows(id: string) {
     return this.http
-      .get<TvShowDto>(
-        `${this.apiUrl}/tv/${id}/similar?api_key=${this.apiKey}`
-      )
+      .get<TvShowDto>(`${this.apiUrl}/tv/${id}/similar?api_key=${this.apiKey}`)
       .pipe(map((data) => data.results.slice(0, 12)));
+  }
+
+  searchTvShows(page: number, searchValue?: string) {
+    const uri = searchValue ? 'search/tv' : 'tv/popular';
+    return this.http.get<TvShowDto>(
+      `${this.apiUrl}/${uri}?query=${searchValue}&page=${page}&api_key=${this.apiKey}`
+    );
+    // .pipe(map((data) => data.results));
   }
 }
