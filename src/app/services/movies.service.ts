@@ -10,8 +10,8 @@ import { CreditsDto } from '../../types/credits';
   providedIn: 'root',
 })
 export class MoviesService {
-  private apiUrl = 'https://api.themoviedb.org/3';
-  private apiKey = 'ff43b9aef50a16f95690beccb5f8df07';
+  private apiUrl = import.meta.env['NG_APP_API_URL'];
+  private apiKey = import.meta.env['NG_APP_API_KEY'];
 
   constructor(private http: HttpClient) {}
 
