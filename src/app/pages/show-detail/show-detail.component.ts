@@ -10,7 +10,7 @@ import { Video } from '../../../types/video';
 import { VideoEmbedComponent } from '../../components/video-embed/video-embed.component';
 import { Image } from '../../../types/image';
 import { ImageModule } from 'primeng/image';
-import { CarouselModule } from 'primeng/carousel';
+import { CarouselModule, CarouselResponsiveOptions } from 'primeng/carousel';
 import { Actor } from '../../../types/credits';
 import { BannerComponent } from '../../components/banner/banner.component';
 import { TvshowsService } from '../../services/tvshows.service';
@@ -43,9 +43,33 @@ export class ShowDetailComponent implements OnInit {
 
   imageSizes = IMAGE_SIZES;
 
+  responsiveOptions: CarouselResponsiveOptions[] = [
+    {
+      breakpoint: '2500px',
+      numVisible: 6,
+      numScroll: 3,
+    },
+    {
+      breakpoint: '1024px',
+      numVisible: 3,
+      numScroll: 3,
+    },
+    {
+      breakpoint: '768px',
+      numVisible: 2,
+      numScroll: 2,
+    },
+    {
+      breakpoint: '460px',
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
+
   constructor(
     private router: ActivatedRoute,
-    private moviesService: MoviesService, private tvService: TvshowsService
+    private moviesService: MoviesService,
+    private tvService: TvshowsService
   ) {}
 
   ngOnInit(): void {
@@ -54,7 +78,7 @@ export class ShowDetailComponent implements OnInit {
       this.showId = params['id'];
     });
 
-    this.showType = this.router.snapshot.params['type']
+    this.showType = this.router.snapshot.params['type'];
 
     if (this.showType === 'movie') {
       this.moviesService.getMovieById(this.showId).subscribe((data) => {
@@ -82,7 +106,7 @@ export class ShowDetailComponent implements OnInit {
 
     if (this.showType === 'tv') {
       this.tvService.getTvShowById(this.showId).subscribe((data) => {
-        this.show = mapToMovie(data)
+        this.show = mapToMovie(data);
       });
 
       this.tvService.getTvShowVideos(this.showId).subscribe((data) => {
@@ -103,7 +127,5 @@ export class ShowDetailComponent implements OnInit {
         this.similarMovies = mapToMovies(data);
       });
     }
-
-    
   }
 }

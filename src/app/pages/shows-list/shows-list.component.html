@@ -14,7 +14,10 @@
   </div>
   <ng-container *ngIf="showsList">
     <div class="grid">
-      <div class="col-2" *ngFor="let show of showsList.results">
+      <div
+        class="col-2"
+        *ngFor="let show of showsList.results"
+      >
         <app-show-item [showItem]="show" [showType]="showType"></app-show-item>
       </div>
     </div>

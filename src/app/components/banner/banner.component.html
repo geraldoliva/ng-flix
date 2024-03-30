@@ -1,7 +1,7 @@
 <div class="banner container" *ngIf="movies.length">
   <h1>{{ title }}</h1>
   <div class="grid">
-    <div class="col-2" *ngFor="let movie of movies">
+    <div class="col-6 md:col-4 lg:col-2" *ngFor="let movie of movies">
       <app-show-item [showItem]="movie" [showType]="showType"></app-show-item>
     </div>
   </div>

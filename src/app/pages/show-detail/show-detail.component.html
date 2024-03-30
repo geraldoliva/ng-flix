@@ -58,7 +58,7 @@
     <p-tabPanel header="Videos">
       <ng-container *ngIf="showVideos">
         <div class="grid">
-          <div class="col-4" *ngFor="let video of showVideos">
+          <div class="col-6 lg:col-4" *ngFor="let video of showVideos">
             <app-video-embed [key]="video.key"></app-video-embed>
           </div>
         </div>
@@ -67,7 +67,7 @@
     <p-tabPanel header="Photos">
       <ng-container *ngIf="showImages">
         <div class="grid">
-          <div class="col-2" *ngFor="let image of showImages">
+          <div class="col-6 md:col-4 lg:col-2" *ngFor="let image of showImages">
             <p-image
               [src]="imageSizes.large + image.file_path"
               [alt]="show.title"
@@ -83,9 +83,8 @@
   <ng-container *ngIf="showCast as actors">
     <p-carousel
       [value]="actors"
-      [numVisible]="6"
-      [numScroll]="3"
       [circular]="false"
+      [responsiveOptions]="responsiveOptions"
     >
       <ng-template let-actor pTemplate="item">
         <div class="actor">
