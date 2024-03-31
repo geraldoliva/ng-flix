@@ -1,27 +1,21 @@
-# NgFlix
+# NGFLIX - Cinematic Universe at Your Fingertips 🎬 🌍
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+## Overview
+**NGFLIX** is a state-of-the-art interactive and  dynamic  web application, developed with PrimeNG's comprehensive suite of feature-rich UI components. Serving as a portal to the vast realm of movies and television, it links users to a global database, providing immediate insights into a wide range of cinematic and televisual content.
 
-## Development server
+### Key Features
+- **Real-time Data Integration**: NGFLIX integrates with an open API, ensuring immediate access to the latest information on a vast array of movies and TV shows.
+- **User-Friendly Experience**: With an emphasis on user interaction, NGFLIX offers a visually compelling and easy-to-navigate interface, simplifying the journey of content discovery.
+- **Enhanced Search and Filter**: Users can utilize advanced filters to refine their searches based on genres, release dates, and ratings within the application.
+- **Responsive Design**: NGFLIX adopts a responsive design strategy, ensuring an optimal user experience across various devices and screen sizes.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Live Demo
+Experience NGFLIX live at: [NGFLIX Live](https://ngflix-app.netlify.app/)
 
-## Code scaffolding
+## Tech Stack
+NGFLIX is built upon:
+- **Angular**: A platform and framework for building single-page client applications using HTML and TypeScript.
+- **PrimeNG**: An ensemble of open-source UI components for Angular.
+- **SCSS**: The most mature, stable, and powerful professional grade CSS extension language in the world.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Refer to their respective documentation for an in-depth understanding of these technologies.
